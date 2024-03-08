@@ -1,0 +1,4 @@
+defaults:
+  - optimizer: adam
+  - scheduler: none
+  

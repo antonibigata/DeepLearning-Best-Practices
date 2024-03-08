@@ -1,0 +1,34 @@
+_target_: src.models.classification_model.ClassificationModel
+
+defaults:
+  - defaults
+  - net: dense_net
+ 
+max_images_to_log: 16
+class_names: ["T-shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+]
+
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
+  _partial_: true
+
+metrics: # Add metrics here
+  - target: torchmetrics.Accuracy
+    name: acc
+    params:
+      task: multiclass
+      num_classes: 10
+  - target: torchmetrics.F1Score
+    name: F1
+    params:
+      task: multiclass
+      num_classes: 10
